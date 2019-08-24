@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-     <!-- Latest compiled and minified CSS -->
+        <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -15,7 +14,7 @@
 
     <!-- TODO import CSS -->
 
-  </head>
+</head>
 </html>
 
 <?php require('db_connect.php'); ?>
@@ -39,13 +38,30 @@
                 <input type="text" name="password-field" placeholder="New password"/><br>
                 <div class="title-tag">Birthday</div>
                 <select>
-                    <option value="Select Day" disabled>Select Day</option>
-                    <?php
-                        for ($day = 1; $day<= 31; $day++)
-                        {
-                            echo '<option value="'.$day.'">'.$day.'</option>';
-                        }
-                    ?>
+                    <div class="inline">
+                        <option value="Day" default disabled>Day</option>
+                        <?php
+                            for ($day = 1; $day<= 31; $day++)
+                            {
+                                echo '<option value="'.$day.'">'.$day.'</option>';
+                            }
+                        ?>
+                        <option value="Month" default disabled>Month</option>
+                        <?php
+                            for ($month = 1; $month<= 12; $month++)
+                            {
+                                echo '<option value="'.$month.'">'.$month.'</option>';
+                            }
+                        ?>
+                        <option value="Day" default disabled>Year</option>
+                        <?php
+                            $currentYear = date('Y');
+                            for ($year = $currentYear; $year >= $currentYear - 115; $year--)
+                            {
+                                echo '<option value="'.$year.'">'.$year.'</option>';
+                            }
+                        ?>
+                    </div>
                
                 </select>
                 <div class="title-tag">Gender</div>
