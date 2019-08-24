@@ -19,7 +19,7 @@
 </head>
 </html>
 
-<?php require('db_connect.php'); 
+<?php require('../db_connect.php'); 
 
 session_start();
 

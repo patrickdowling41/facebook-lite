@@ -1,12 +1,6 @@
-<?php require('db_connect.php');
+<?php require('../db_connect.php');
 
 session_start();
-
-// Check to ensure birthday is not null
-if ((isset($_POST[$birthDay]) == false || isset($_POST[$birthMonth]) == false || isset($_POST[$birthYear]) == false))
-{
-    header("Location: ../index.php");
-}
 
 $firstname = $_POST['firstname'];
 $surname = $_POST['surname'];
@@ -16,6 +10,60 @@ $birthDay = $_POST['day'];
 $birthMonth = $_POST['month'];
 $birthYear = $_POST['year'];
 $gender = $_POST['gender'];
+
+switch ($birthMonth)
+{
+    case 1:
+        $month='JAN';
+        break;
+
+    case 2:
+        $month='FEB';
+        break;
+
+    case 3:
+        $month='MAR';
+        break;
+
+    case 4:
+        $month='APR';
+        break;
+
+    case 5:
+        $month='MAY';
+        break;
+
+    case 6:
+        $month='JUN';
+        break;
+
+    case 7:
+        $month='JUL';
+        break;
+
+    case 8:
+        $month='AUG';
+        break;
+
+    case 9:
+        $month='SEP';
+        break;
+
+    case 10:
+        $month='OCT';
+        break;
+
+    case 11:
+        $month='NOV';
+        break;
+
+    case 12:
+        $month='DEC';
+        break;
+}
+
+$dateOfBirth=$birthDay.'-'.$month.'-'.$birthYear;
+
 
 $query = `INSERT into FacebookUser 
 (
