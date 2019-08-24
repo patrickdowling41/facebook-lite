@@ -64,8 +64,7 @@ switch ($birthMonth)
 
 $dateOfBirth=$birthDay.'-'.$month.'-'.$birthYear;
 
-
-$query = `INSERT into FacebookUser 
+$query = 'INSERT into FacebookUser 
 (
     email,
     firstName,
@@ -78,17 +77,27 @@ $query = `INSERT into FacebookUser
 )
 values
 (
-    '$email',
-    '$firstname',
-    '$surname',
-    '$firstname.$surname',
-    '$dateOfBirth',
-    '$gender',
-    'private',
-    '$passwordHash'
-)`;
+    ":bv_email",
+    ":bv_firstName",
+    ":bv_surname",
+    ":bv_screenName",
+    ":bv_dateOfBirth",
+    ":bv_gender"
+    ":bv_visibility"
+    ":bv_passwordHash"
+)';
 
 $stid = oci_parse($conn, $query);
+
+oci_bind_by_name($stid, ':bv_email', $email);
+oci_bind_by_name($stid, ':bv_firstName', $firstname);
+oci_bind_by_name($stid, ':bv_surname', $surname);
+oci_bind_by_name($stid, ':bv_screenName', $firstname.$surname);
+oci_bind_by_name($stid, ':bv_dateOfBirth', $dateOfBirth);
+oci_bind_by_name($stid, 'bv_gender', $gender);
+oci_bind_by_name($stid, ':bv_visibility', "private");
+oci_bind_by_name($stid, ':bv_passwordHash', $passwordHash);
+
 oci_execute($stid);
 
 ?>
