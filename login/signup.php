@@ -1,12 +1,6 @@
-<?php require('db_connect.php');
+<?php require('../db_connect.php');
 
 session_start();
-
-// Check to ensure birthday is not null
-if (!(isset($_POST[$birthDay]) || isset($_POST[$birthMonth]) || isset($_POST[$birthYear])))
-{
-    header("Location: login/index.php");
-}
 
 $firstname = $_POST['firstname'];
 $surname = $_POST['surname'];
