@@ -92,12 +92,22 @@ $defaultVisibility = "private";
 
 $stid = oci_parse($conn, $query);
 
+echo '<p>'.$email.'</p>';
+echo '<p>'.$firstname.'</p>';
+echo '<p>'.$surname.'</p>';
+echo '<p>'.$screenName.'</p>';
+echo '<p>'.$dateOfBirth.'</p>';
+echo '<p>'.$gender.'</p>';
+echo '<p>'.$defaultVisibility.'</p>';
+echo '<p>'.$passwordHash.'</p>';
+
+
 oci_bind_by_name($stid, ':bv_email', $email);
 oci_bind_by_name($stid, ':bv_firstName', $firstname);
 oci_bind_by_name($stid, ':bv_surname', $surname);
 oci_bind_by_name($stid, ':bv_screenName', $screenName);
 oci_bind_by_name($stid, ':bv_dateOfBirth', $dateOfBirth);
-oci_bind_by_name($stid, 'bv_gender', $gender);
+oci_bind_by_name($stid, ':bv_gender', $gender);
 oci_bind_by_name($stid, ':bv_visibility', $defaultVisibility);
 oci_bind_by_name($stid, ':bv_passwordHash', $passwordHash);
 
