@@ -46,6 +46,8 @@
                                 echo '<option value="'.$day.'">'.$day.'</option>';
                             }
                         ?>
+		</select>
+		<select>
                         <option value="Month" default disabled>Month</option>
                         <?php
                             for ($month = 1; $month<= 12; $month++)
@@ -53,6 +55,8 @@
                                 echo '<option value="'.$month.'">'.$month.'</option>';
                             }
                         ?>
+		</select>
+		<select>
                         <option value="Day" default disabled>Year</option>
                         <?php
                             $currentYear = date('Y');
