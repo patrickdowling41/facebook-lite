@@ -77,30 +77,20 @@ $query = 'INSERT into FacebookUser
 )
 values
 (
-    ":bv_email",
-    ":bv_firstName",
-    ":bv_surname",
-    ":bv_screenName",
-    ":bv_dateOfBirth",
-    ":bv_gender"
-    ":bv_visibility"
-    ":bv_passwordHash"
+    :bv_email,
+    :bv_firstName,
+    :bv_surname,
+    :bv_screenName,
+    :bv_dateOfBirth,
+    :bv_gender,
+    :bv_visibility,
+    :bv_passwordHash
 )';
 
 $screenName= $firstname.$surname;
 $defaultVisibility = "private";
 
 $stid = oci_parse($conn, $query);
-
-echo '<p>'.$email.'</p>';
-echo '<p>'.$firstname.'</p>';
-echo '<p>'.$surname.'</p>';
-echo '<p>'.$screenName.'</p>';
-echo '<p>'.$dateOfBirth.'</p>';
-echo '<p>'.$gender.'</p>';
-echo '<p>'.$defaultVisibility.'</p>';
-echo '<p>'.$passwordHash.'</p>';
-
 
 oci_bind_by_name($stid, ":bv_email", $email);
 oci_bind_by_name($stid, ":bv_firstName", $firstname);
