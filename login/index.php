@@ -55,8 +55,8 @@ session_start();
                 <div class="inline">
 
                 <!-- Select for Day of birthday -->
-                <select name="day">
-                    <option value="Day" default disabled required >Day</option>
+                <select name="day" required>
+                    <option value="Day" default disabled >Day</option>
                     <?php
                         for ($day = 1; $day<= 31; $day++)
                         {
@@ -66,7 +66,7 @@ session_start();
 		        </select>
 
                 <!-- Select for Month of birthday -->
-		        <select name="month">
+		        <select name="month" required>
                     <option value="Month" default disabled required >Month</option>
                     <?php
                         for ($month = 1; $month<= 12; $month++)
@@ -76,8 +76,8 @@ session_start();
                     ?>
 		        </select>
                 <!-- Select for Year of birthday -->
-		        <select name="year">
-                    <option value="Year" default disabled required>Year</option>
+		        <select name="year" required>
+                    <option value="Year" default disabled>Year</option>
                     <?php
                         $currentYear = date('Y');
                         for ($year = $currentYear; $year >= $currentYear - 80; $year--)

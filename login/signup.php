@@ -3,15 +3,15 @@
 session_start();
 
 // Check to ensure birthday is not null
-if (!(isset($_POST[$birthDay]) || isset($_POST[$birthMonth]) || isset($_POST[$birthYear])))
+if ((isset($_POST[$birthDay]) == false || isset($_POST[$birthMonth]) == false || isset($_POST[$birthYear]) == false))
 {
-    header("Location: login/index.php");
+    header("Location: ../index.php");
 }
 
 $firstname = $_POST['firstname'];
 $surname = $_POST['surname'];
 $email = $_POST['email'];
-$passwordHash = hash("sha128", $_POST['password']);
+$passwordHash = hash("sha256", $_POST['password']);
 $birthDay = $_POST['day'];
 $birthMonth = $_POST['month'];
 $birthYear = $_POST['year'];
