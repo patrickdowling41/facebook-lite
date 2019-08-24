@@ -87,12 +87,14 @@ values
     ":bv_passwordHash"
 )';
 
+$screenName= $firstname.$surname;
+
 $stid = oci_parse($conn, $query);
 
 oci_bind_by_name($stid, ':bv_email', $email);
 oci_bind_by_name($stid, ':bv_firstName', $firstname);
 oci_bind_by_name($stid, ':bv_surname', $surname);
-oci_bind_by_name($stid, ':bv_screenName', $firstname.$surname);
+oci_bind_by_name($stid, ':bv_screenName', $screenName);
 oci_bind_by_name($stid, ':bv_dateOfBirth', $dateOfBirth);
 oci_bind_by_name($stid, 'bv_gender', $gender);
 oci_bind_by_name($stid, ':bv_visibility', "private");
