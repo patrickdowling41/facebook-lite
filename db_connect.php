@@ -1,3 +1,5 @@
+<!-- Connection setup for Oracle database -->
+
 <?php
     $username = 's3605032';
     $password = 'Ihateoracle101';
