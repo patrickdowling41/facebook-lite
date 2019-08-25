@@ -5,6 +5,11 @@
     <?php require('../db_connect.php'); 
     session_start();
 
+    if (isset($_SESSION["loggedIn"] ) === false)
+    {
+        $_SESSION["loggedIn"] = "no";
+    }
+
     if ($_SESSION["loggedIn"] === "yes")
     {
         header("Location: ../app");
