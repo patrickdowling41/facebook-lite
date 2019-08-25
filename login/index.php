@@ -5,6 +5,11 @@
     <?php require('../db_connect.php'); 
     session_start();
 
+    if (sessionStorage.getItem("loggedIn") === NULL)
+    {
+        sessionStorage.setItem("loggedIn", false);
+    }
+
     if (sessionStorage.getItem("loggedIn") === true)
     {
         header("Location: ../app");
