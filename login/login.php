@@ -21,14 +21,13 @@ oci_execute($stid);
 // There will either be 1 or no rows
 while (($row = oci_fetch_array($stid, OCI_ASSOC)) != false)
 {
-
     echo '<p>'.$row['email'].' and '.$row['passwordHash'].'</p>';
     if (strcmp($row['passwordHash'], $passwordHash))
     {
         /* used as an identifier that the user is now logged in when redirected back to the login home
         * user emails are stored as a cookie for 30 days */
         setcookie("userEmail", $email, time() + (86400 * 30), "/");
-        $_SESSION["loggedIn"] = true;
+        $_SESSION["loggedIn"] = "yes";
     }
 }
 

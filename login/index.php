@@ -5,7 +5,7 @@
     <?php require('../db_connect.php'); 
     session_start();
 
-    if ($_SESSION["loggedIn"] === true)
+    if ($_SESSION["loggedIn"] === "yes")
     {
         header("Location: ../app");
     }
