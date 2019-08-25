@@ -12,7 +12,7 @@ $passwordHash = hash("sha256", $_POST['login-password']);
 $findUser = 
 'SELECT email, passwordHash
 from FACEBOOKUSER 
-where LOWER(email) like LOWER(:bv_email)';
+where LOWER(email) like LOWER(:bv_email);';
 
 $stid = oci_parse($conn, $findUser);
 oci_bind_by_name($stid, ":bv_email", $email);
@@ -23,7 +23,6 @@ while (($row = oci_fetch_array($stid, OCI_ASSOC)) != false)
 {
     if (strcmp($row['PASSWORDHASH'], $passwordHash) === 0)
     {
-	echo '<p>password1: '.$passwordHash.' password: '.$row['PASSWORDHASH'].'</p>';
         /* used as an identifier that the user is now logged in when redirected back to the login home
         * user emails are stored as a cookie for 30 days */
         setcookie("userEmail", $email, time() + (86400 * 30), "/");

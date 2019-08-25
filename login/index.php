@@ -5,11 +5,12 @@
     <?php require('../db_connect.php'); 
     session_start();
 
+    // sets value to no if it's undefined.
     if (isset($_SESSION["loggedIn"] ) === false)
     {
         $_SESSION["loggedIn"] = "no";
     }
-
+    // moves user directly to app if logged in already
     if ($_SESSION["loggedIn"] === "yes")
     {
         header("Location: ../app");

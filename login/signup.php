@@ -10,6 +10,21 @@ $birthDay = $_POST['day'];
 $birthMonth = $_POST['month'];
 $birthYear = $_POST['year'];
 
+// user existence check
+$query='SELECT email from FacebookUser;';
+$stid = oci_parse($conn, $query);
+oci_execute($stid);
+
+while (($row = oci_fetch_array($stid, OCI_ASSOC)) != false)
+{
+    // checks when email exists in the database already
+    if (strcmp($row['EMAIL'], $email) === 0)
+    {
+        $_SESSION['signupSuccess'] = 'yes';
+        header('Location: index.php');
+    }
+}
+
 if (!isset($_POST['gender']))
 {
     $gender = NULL;
@@ -19,6 +34,7 @@ else
     $gender = $_POST['gender'];
 }
 
+// Changes number of month to accepted oracle month
 switch ($birthMonth)
 {
     case 1:
@@ -69,7 +85,6 @@ switch ($birthMonth)
         $month='DEC';
         break;
 }
-
 $dateOfBirth=$birthDay.'-'.$month.'-'.$birthYear;
 
 $query = 'INSERT into FacebookUser 
@@ -110,5 +125,9 @@ oci_bind_by_name($stid, ":bv_visibility", $defaultVisibility);
 oci_bind_by_name($stid, ":bv_passwordHash", $passwordHash);
 
 oci_execute($stid);
+
+// return to login page successfully
+$_SESSION['signupSuccess'] = 'yes';
+header('Location: index.php');
 
 ?>
