@@ -1,5 +1,17 @@
 body {
-    background-color: #CCCBFF;
+    background-color: #dfe9ff;
+    height: 100vh;
+}
+
+html
+{
+    height: 100vh;
+}
+
+.login-nav
+{
+    background-color: #3c5a99;
+    overflow: hidden;
 }
 
 .fb-nav-logo
@@ -27,6 +39,7 @@ body {
 {
     margin: 0;
     padding: 0;
+    max-width: 20vh;
 }
 
 .login-btn
@@ -58,6 +71,7 @@ body {
     padding: 0.75vh;
     border-radius: 10px;
     margin-left: 7vh;
+    margin-bottom: 5vh;
     font-size: 18px;
 }
 
@@ -69,8 +83,8 @@ h1
 h2
 {
     margin-top: 10vh;
-    margin-left: 3vh;
-    margin-right: 5vh;
+    margin-right: 10vh;
+    margin-left: -5vh;
     color:#0400C4;
     font-weight: bold;
     font-size: 18px;
@@ -91,6 +105,20 @@ h2
 
 .span-page
 {
-    height: 100vh;
+    height:60vh;
 }
 
+#login-map
+{
+    margin-left: -5vh;
+}
+
+@media only screen and (max-width: 1200px) {
+    .nav-content, .page-content {
+        text-align: center;
+    }
+    h2, #login-map, .span-page {
+        display: none;
+    }
+
+  }

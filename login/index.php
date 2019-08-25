@@ -34,54 +34,49 @@
 
     <link rel="stylesheet" type="text/css" href="../css/login.css">
 
-    <!-- Nav bar -->
-    <nav class="login-nav" style="background-color: #3c5a99">
-        <div class="container">
-            <div class="row">
-
-                <!-- buffer column -->
-                <div class="col-md-2">
-                </div>
-                <!-- column for logo -->
-                <div class="col-lg-5 fb-nav-logo">
-                    <i height="62" width="170">Facebook-Lite</i>
-                </div>
-                <!-- column for login -->
-                <div class="col-lg-5">
-                    
-                    <form name="login-form" action="login.php" method="POST">
-
-                        <!-- another row nested within the previous row for the login -->
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-sm-2">
-                                    <div class="login-tag">Email</div>
-                                    <input class="login-field" type="text" name="login-email">
-                                </div>
-                                <div class="col-sm-2">
-                                    <div class="login-tag">Password</div>
-                                    <input class="login-field" type="password" name="login-password">
-                                </div> 
-                                <div class="col-sm-2">
-                                    <button type="submit" class="login-btn btn-primary">Login</button>
-                                </div>
-                            </div>
-                        </div>
-
-                    </form>
-
-                </div>
-            </div>
-        </div>
-    </nav>
-
 </head>
-</html>
-
 <body>
 
+<!-- Nav bar -->
+<nav class="login-nav">
+    <div class="container">
+        <div class="row nav-content">
+
+            <!-- column for logo -->
+            <div class="col-sm-6 fb-nav-logo">
+                <i height="62" width="170">Facebook-Lite</i>
+            </div>
+            <!-- column for login -->
+            <div class="col-lg-6">
+                
+                <form name="login-form" action="login.php" method="POST">
+
+                    <!-- another row nested within the previous row for the login -->
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <div class="login-tag">Email</div>
+                                <input class="login-field" type="text" name="login-email">
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="login-tag">Password</div>
+                                <input class="login-field" type="password" name="login-password">
+                            </div> 
+                            <div class="col-sm-2">
+                                <button type="submit" class="login-btn btn-primary">Login</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</nav>
+
 <div class="container">
-    <div class="row">
+    <div class="row page-content">
         <!-- Left hand column for Recent Login -->
         <div class="span-page col-lg-6">
             <h2>Facebook helps you connect and share with the people in your life.</h2>
@@ -161,5 +156,9 @@
     </div>
 </div>
 
+<footer class="footer"></footer>
+
 </body>
+
+</html>
 
