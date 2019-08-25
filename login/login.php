@@ -12,7 +12,7 @@ $passwordHash = hash("sha256", $_POST['login-password']);
 $findUser = 
 'SELECT email, passwordHash
 from FACEBOOKUSER 
-where LOWER(email) like LOWER(:bv_email);';
+where LOWER(email) like LOWER(:bv_email)';
 
 $stid = oci_parse($conn, $findUser);
 oci_bind_by_name($stid, ":bv_email", $email);
