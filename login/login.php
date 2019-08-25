@@ -1,7 +1,7 @@
 <?php require('../db_connect.php');
 session_start();
 
-if (isset($_POST['login-email'])=== false || isset($_POST['login-password']) === false)
+if (!(isset($_POST['login-email'])) || !(isset($_POST['login-password'])))
 {
     header("Location: index.php");
 }
@@ -21,7 +21,9 @@ oci_execute($stid);
 // There will either be 1 or no rows
 while (($row = oci_fetch_array($stid, OCI_ASSOC)) != false)
 {
-    if (strcasecmp($row['passwordHash'], $passwordHash))
+
+    echo '<p>'.$row['email'].' and '.$row['passwordHash'].'</p>';
+    if (strcmp($row['passwordHash'], $passwordHash))
     {
         /* used as an identifier that the user is now logged in when redirected back to the login home
         * user emails are stored as a cookie for 30 days */
@@ -31,4 +33,4 @@ while (($row = oci_fetch_array($stid, OCI_ASSOC)) != false)
 }
 
 // redirect back to index whether login was successful or not
-header("Location: index.php");
+// header("Location: index.php");
