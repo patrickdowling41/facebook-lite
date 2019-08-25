@@ -1,0 +1,96 @@
+body {
+    background-color: #CCCBFF;
+}
+
+.fb-nav-logo
+{
+    margin-top: 2vh;
+    margin-bottom: 0.5vh;
+    color: white;
+    font-size: 32px;
+    font-family: 'Muli', sans-serif;
+    font-weight: bold;
+}
+
+.inline
+{
+    display: inline-block;
+}
+
+.login-tag
+{
+    margin-top: 1vh;
+    color: white;
+}
+
+.login-field
+{
+    margin: 0;
+    padding: 0;
+}
+
+.login-btn
+{
+    margin-left: 1vh;
+    margin-top: 3vh;
+    margin-bottom: 1vh;
+}
+
+.signup-field
+{
+    border-radius: 10px;
+    padding: 0.75vh;
+    margin-right: 1vh;
+    margin-top: 1vh;
+}
+
+.title-tag
+{
+    color: #888888;
+    size: 12px;
+    font-weight: bold;
+    margin-top: 1.5vh;
+}
+
+.sign-up-btn
+{
+    width: 25vh;
+    padding: 0.75vh;
+    border-radius: 10px;
+    margin-left: 7vh;
+    font-size: 18px;
+}
+
+h1
+{
+    font-weight: bold;
+}
+
+h2
+{
+    margin-top: 10vh;
+    margin-left: 3vh;
+    margin-right: 5vh;
+    color:#0400C4;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.login-dropdown
+{
+    font-size:18px;
+    margin: 0;
+    padding: 0;
+}
+
+.radio-inline
+{
+    font-size: 16px;
+    padding-bottom: 3vh;
+}
+
+.span-page
+{
+    height: 100vh;
+}
+

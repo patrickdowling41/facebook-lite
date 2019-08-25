@@ -29,8 +29,10 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> 
 
-    <!-- TODO import CSS -->
+    <!-- Facebook logo font -->
+    <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" type="text/css" href="../css/login.css">
 
     <!-- Nav bar -->
     <nav class="login-nav" style="background-color: #3c5a99">
@@ -41,8 +43,8 @@
                 <div class="col-md-2">
                 </div>
                 <!-- column for logo -->
-                <div class="col-lg-5">
-                    <i class="fb-nav-logo" height="62" width="170">Facebook-Lite</i>
+                <div class="col-lg-5 fb-nav-logo">
+                    <i height="62" width="170">Facebook-Lite</i>
                 </div>
                 <!-- column for login -->
                 <div class="col-lg-5">
@@ -61,7 +63,7 @@
                                     <input class="login-field" type="password" name="login-password">
                                 </div> 
                                 <div class="col-sm-2">
-                                    <button type="submit" class="btn btn-primary">Login</button>
+                                    <button type="submit" class="login-btn btn-primary">Login</button>
                                 </div>
                             </div>
                         </div>
@@ -81,8 +83,9 @@
 <div class="container">
     <div class="row">
         <!-- Left hand column for Recent Login -->
-        <div class="col-lg-6">
-            <!-- TODO -->
+        <div class="span-page col-lg-6">
+            <h2>Facebook helps you connect and share with the people in your life.</h2>
+            <img id="login-map" src="../img/login-map.png">
         </div>
 
         <!-- Right hand column for Account Registration -->
@@ -94,19 +97,19 @@
  		<form name="signup-form" action="signup.php" method="POST">
                 <!-- Full Name --> 
                 <div class="inline">
-                    <input type="text" name="firstname" placeholder="First name" required />
-                    <input type="text" name="surname" placeholder="Surname" required />
+                    <input class="signup-field" type="text" name="firstname" placeholder="First name" required />
+                    <input class="signup-field" type="text" name="surname" placeholder="Surname" required />
                 </div><br>
                 <!-- End full name segment -->
 
-                <input type="text" name="email" placeholder="Email" required /><br>
-                <input type="password" name="password" placeholder="New password" required /><br>
+                <input class="signup-field" type="text" name="email" placeholder="Email" required /><br>
+                <input class="signup-field" type="password" name="password" placeholder="New password" required /><br>
                 
                 <div class="title-tag">Birthday</div>
                 <div class="inline">
 
                 <!-- Select for Day of birthday -->
-                <select name="day" required>
+                <select class="login-dropdown" name="day" required>
                     <option value="Day" default disabled >Day</option>
                     <?php
                         for ($day = 1; $day<= 31; $day++)
@@ -117,7 +120,7 @@
 		        </select>
 
                 <!-- Select for Month of birthday -->
-		        <select name="month" required>
+		        <select class="login-dropdown" name="month" required>
                     <option value="Month" default disabled required >Month</option>
                     <?php
                         for ($month = 1; $month<= 12; $month++)
@@ -127,7 +130,7 @@
                     ?>
 		        </select>
                 <!-- Select for Year of birthday -->
-		        <select name="year" required>
+		        <select class="login-dropdown"  name="year" required>
                     <option value="Year" default disabled>Year</option>
                     <?php
                         $currentYear = date('Y');
@@ -141,12 +144,16 @@
                 <div class="title-tag">Gender</div>
 
                 <!-- Gender options radio buttons -->
-                <div class="inline">
-                    <input type="radio" name="gender" value="male"> Male<br>
-                    <input type="radio" name="gender" value="female"> Female<br>
-                    <input type="radio" name="gender" value="other"> Other<br>
-                </div>
-
+                <label class="radio-inline">
+                    <input class="gender" type="radio" name="gender" value="male"> Male<br>
+                </label>
+                <label class="radio-inline">
+                    <input class="gender" type="radio" name="gender" value="female"> Female<br>
+                </label>
+                <label class="radio-inline">
+                    <input class="gender" type="radio" name="gender" value="other"> Other<br>
+                </label>
+                </div><br>
                 <button class="sign-up-btn btn btn-success" type="submit">Sign Up</button>
 
             </form> 
