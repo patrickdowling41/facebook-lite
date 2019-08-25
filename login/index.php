@@ -85,8 +85,8 @@
             <h3>It's quick and easy</h3>
 
                  
- 
-                <!-- Full Name -->
+ 		<form name="signup-form" action="signup.php" method="POST">
+                <!-- Full Name --> 
                 <div class="inline">
                     <input type="text" name="firstname" placeholder="First name" required />
                     <input type="text" name="surname" placeholder="Surname" required />
