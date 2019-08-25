@@ -9,7 +9,15 @@ $passwordHash = hash("sha256", $_POST['password']);
 $birthDay = $_POST['day'];
 $birthMonth = $_POST['month'];
 $birthYear = $_POST['year'];
-$gender = $_POST['gender'];
+
+if (!isset($_POST['gender']))
+{
+    $gender = NULL;
+}
+else
+{
+    $gender = $_POST['gender'];
+}
 
 switch ($birthMonth)
 {
