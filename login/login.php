@@ -24,9 +24,9 @@ while (($row = oci_fetch_array($stid, OCI_ASSOC)) != false)
     if (strcasecmp($row['passwordHash'], $passwordHash))
     {
         /* used as an identifier that the user is now logged in when redirected back to the login home
-        * user emails are stored until removed. user will be logged out when the session ends */
-        localStorage.setItem("email", $email);
-        sessionStorage.setItem("loggedIn", true);
+        * user emails are stored as a cookie for 30 days */
+        setcookie("userEmail", $email, time() + (86400 * 30), "/");
+        $_SESSION["loggedIn"] = true;
     }
 }
 
