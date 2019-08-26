@@ -105,7 +105,7 @@
 
                 <!-- Select for Day of birthday -->
                 <select class="login-dropdown" name="day" required>
-                    <option value="Day" default disabled >Day</option>
+                    <option value="Day" selected disabled >Day</option>
                     <?php
                         for ($day = 1; $day<= 31; $day++)
                         {
@@ -116,7 +116,7 @@
 
                 <!-- Select for Month of birthday -->
 		        <select class="login-dropdown" name="month" required>
-                    <option value="Month" default disabled required >Month</option>
+                    <option value="Month" selected disabled required >Month</option>
                     <?php
                         for ($month = 1; $month<= 12; $month++)
                         {
@@ -126,7 +126,7 @@
 		        </select>
                 <!-- Select for Year of birthday -->
 		        <select class="login-dropdown"  name="year" required>
-                    <option value="Year" default disabled>Year</option>
+                    <option value="Year" selected disabled>Year</option>
                     <?php
                         $currentYear = date('Y');
                         for ($year = $currentYear; $year >= $currentYear - 80; $year--)
