@@ -31,7 +31,7 @@
 <?php
 
 require('../db_connect.php');
-session_start();
+//session_start();
 
 // print user name at the top
 $getScreenName = 
