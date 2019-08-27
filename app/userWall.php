@@ -67,8 +67,11 @@ while (($row = oci_fetch_array($stid, OCI_ASSOC)) != false)
     echo '</div>';
     ?>
     <div class="inline">
-        <i class="far fa-thumbs-up post-btn" onclick="postLike()">
-        <i class="fas fa-reply post-comment" onclick="postComment()">
+        <div class="post-btn" onclick="postLike()">
+            <i class="far fa-thumbs-up fa-3x">
+        </div>
+        <div class="post-btn" onclick="postComment()">
+            <i class="fas fa-reply fa-3x" >
     </div>
     <?php
 
