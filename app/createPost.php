@@ -5,7 +5,7 @@ session_start();
 $body = $_POST['cp-body'];
 $email = $$_COOKIE['email'];
 date_default_timezone_set('Australia/Melbourne');
-$timeOfPost = date('d-m-Y h:i:s');
+$timeOfPost = date('d-M-Y');
 
 $addLike = 'INSERT INTO RATING (
     body,
