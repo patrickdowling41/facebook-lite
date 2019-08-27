@@ -25,6 +25,10 @@ oci_bind_by_name($stid, ":bv_body", $body);
 oci_bind_by_name($stid, ":bv_email", $email);
 oci_bind_by_name($stid, "bv_timeOfPost", $timeOfPost);
 
-header("Location: index.php");
+echo $timeOfPost ;
+echo $email;
+echo $body;
+
+//header("Location: index.php");
 
 ?>
