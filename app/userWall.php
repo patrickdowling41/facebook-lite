@@ -66,7 +66,7 @@ while (($row = oci_fetch_array($stid, OCI_ASSOC)) != false)
         echo '<input class="post-id" type="hidden" value="'.$row['POSTID'].'">';
     echo '</div>';
     ?>
-    <div class="inline">';
+    <div class="inline">
         <i class="far fa-thumbs-up post-btn" onclick="postLike()">
         <i class="fas fa-reply post-comment" onclick="postComment()">
     </div>
@@ -88,7 +88,7 @@ while (($row = oci_fetch_array($stid, OCI_ASSOC)) != false)
             },
             function(data)
             {
-                //todo callback function
+                alert("success");
             }
         );
     }
