@@ -42,14 +42,14 @@ include_once('nav.php');
             <div class="col-xl-6">
                 <div class="create-post">
                     <h3 id="cp-tag">Create Post</h3>
-                    <form>
-                        <input class="cp-field" type="text" placeholder="What's on your mind?">
+                    <form action="createPost.php" method="POST">
+                        <input class="cp-body" type="text" placeholder="What's on your mind?">
                     </form>
                 </div>
 
                 <!-- This is responsible for displaying all of the logged in users posts. -->
                 <?php
-                    include_once('usersWall.php');
+                    include_once('userWall.php');
                 ?>
 
             </div>
