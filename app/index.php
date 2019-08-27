@@ -43,7 +43,7 @@ include_once('nav.php');
                 <div class="create-post">
                     <h3 id="cp-tag">Create Post</h3>
                     <form action="createPost.php" method="POST">
-                        <input class="cp-body" type="text" placeholder="What's on your mind?">
+                        <input class="cp-body" name="cp-body" type="text" placeholder="What's on your mind?">
                         <input class="post-button" type="submit">
                     </form>
                 </div>
