@@ -1,20 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-
-<?php require('../db_connect.php'); 
-session_start();
-
-// Routes to login page if user is not logged in.
-/*if (strcmp($_SESSION['loggedIn'], "yes") !== 0)
-{
-    header("Location: ../login");
-}*/
-
-include_once('nav.php');
-
-?>
-
 <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -36,29 +19,14 @@ include_once('nav.php');
 
 <body>
 
+    <nav>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-xl-6">
-                <div class="create-post">
-                    <h3 id="cp-tag">Create Post</h3>
-                    <form>
-                        <input class="cp-field" type="text" placeholder="What's on your mind?">
-                    </form>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-1">
+                    <a href="index.php"> <i class="home-btn fab fa-facebook-square fa-3x"></i></a>
                 </div>
-
-                <!-- This is responsible for displaying all of the logged in users posts. -->
-                <?php
-                    include_once('usersWall.php');
-                ?>
-
             </div>
         </div>
-    </div>
-
-    </div>
-    
-    
+    </nav>
 </body>
-
-<body>
