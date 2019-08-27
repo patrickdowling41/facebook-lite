@@ -61,14 +61,14 @@ while (($row = oci_fetch_array($stid, OCI_ASSOC)) != false)
 {
     // used as an identifier for the post as a whole.
     echo '<div id="'.$row['POSTID'].'">';
-        echo '<div class="post-timestamp">'.$row['TIMESTAMP'].'</div>';
-        echo '<div class="post-body">'.$row['BODY'].'</div>';
+        echo '<div class="post-time">'.$row['POSTTIME'].'</div>';
+        echo '<div class="post-body">'.$row['BODYTEXT'].'</div>';
         echo '<input class="post-id" type="hidden" value="'.$row['POSTID'].'">';
     echo '</div>';
     ?>
     <div class="inline">';
-        <input type="submit" onclick="postLike()" class="far fa-thumbs-up post-btn">
-        <input type="submit" onclick="postComment()" class="fas fa-reply post-comment">
+        <i class="far fa-thumbs-up post-btn" onclick="postLike()">
+        <i class="fas fa-reply post-comment" onclick="postComment()">
     </div>
     <?php
 
