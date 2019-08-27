@@ -1,5 +1,5 @@
 CREATE TABLE FriendRequest (
-    requestID             INTEGER NOT NULL ,
+    requestID             NUMBER GENERATED ALWAYS as IDENTITY ,
     sentOrReceived        VARCHAR2 (8) ,
     CONSTRAINT FRIENDREQUEST_PRIMARYKEY PRIMARY KEY ( requestID )
 );
@@ -7,13 +7,13 @@ CREATE TABLE FriendRequest (
 CREATE TABLE Friend
   (
     email                   VARCHAR2 (128) NOT NULL ,
-    friendshipID            INTEGER NOT NULL
+    friendshipID            NUMBER NOT NULL
   ) ;
 
 
 CREATE TABLE Friendship
   (
-    friendshipID INTEGER NOT NULL ,
+    friendshipID NUMBER GENERATED ALWAYS as IDENTITY ,
     startDate    DATE NOT NULL ,
     friendType   VARCHAR2 (32) NOT NULL,
     CONSTRAINT FREIDNSHIP_PRIMARYKEY PRIMARY KEY ( friendshipID )
@@ -22,15 +22,15 @@ CREATE TABLE Friendship
 
 CREATE TABLE Rating
   (
-    ratingID      INTEGER NOT NULL ,
-    postID	INTEGER NOT NULL ,
+    ratingID      NUMBER GENERATED ALWAYS as IDENTITY ,
+    postID	NUMBER,
     raterEmail  VARCHAR2 (128) NOT NULL,
     CONSTRAINT LIKE_PRIMARYKEY PRIMARY KEY ( ratingID) 
   ) ;
 
 CREATE TABLE Location
   (
-    locationID INTEGER NOT NULL ,
+    locationID NUMBER GENERATED ALWAYS as IDENTITY ,
     city       VARCHAR2 (64) NOT NULL ,
     country    VARCHAR2 (64) NOT NULL,
     CONSTRAINT LOCATION_PRIMARYKEY PRIMARY KEY ( locationID )
@@ -39,7 +39,7 @@ CREATE TABLE Location
 
 CREATE TABLE Post
   (
-    postID         INTEGER NOT NULL ,
+    postID         NUMBER GENERATED ALWAYS as IDENTITY,
     replyToID      INTEGER ,
     body           VARCHAR2 (256) NOT NULL ,
     posterEmail          VARCHAR2 (128) NOT NULL ,
@@ -66,7 +66,7 @@ CREATE TABLE FacebookUser (
 CREATE TABLE UserRequest
   (
     email     VARCHAR2 (128) NOT NULL ,
-    requestID INTEGER NOT NULL
+    requestID NUMBER NOT NULL
   ) ;
 
 
