@@ -1,6 +1,6 @@
 CREATE TABLE FriendRequest (
     requestID             NUMBER GENERATED ALWAYS as IDENTITY ,
-    sentOrReceived        VARCHAR2 (8) ,
+    timeOfRequest          TIMESTAMP NOT NULL,
     CONSTRAINT FRIENDREQUEST_PRIMARYKEY PRIMARY KEY ( requestID )
 );
 
@@ -66,7 +66,8 @@ CREATE TABLE FacebookUser (
 CREATE TABLE UserRequest
   (
     email     VARCHAR2 (128) NOT NULL ,
-    requestID NUMBER NOT NULL
+    requestID NUMBER NOT NULL,
+    sentOrReceived VARCHAR2 (8)  NOT NULL
   ) ;
 
 
