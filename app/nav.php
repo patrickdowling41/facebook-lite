@@ -23,8 +23,19 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-xs-1">
+                <div class="col-lg-10 inline">
                     <a href="index.php"> <i class="home-btn fab fa-facebook-square fa-3x"></i></a>
+                    <form action="addFriend.php" method="POST">
+                        <input class="friend-search-field" name="friend-search" type="text" placeholder="Search">
+                        <button class="friend-search-btn" type="Submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                </div>
+                <div class="col-xs-2 right-align">
+                    <a href="friendRequests.php"> <i class="nav-btn fas fa-user-friends fa-2x"></i></a>
+                    <a href="settings.php"> <i class="nav-btn fas fa-cog fa-2x"></i></a>
+                    <a href="../login/logout.php"> <i class="nav-btn fas fa-sign-out-alt fa-2x"></i></a>
                 </div>
             </div>
         </div>
