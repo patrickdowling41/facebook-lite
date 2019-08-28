@@ -13,7 +13,7 @@ if (strcmp($_SESSION['loggedIn'], "yes") !== 0)
 
 $search = $_POST['friend-search'];
 
-$searchUser='SELECT FACEBOOKUSER.screenName, LOCATION.city, LOCATION.country
+$searchUser='SELECT screenName, city, country
 FROM FACEBOOKUSER
 LEFT JOIN LOCATION
 ON FACEBOOKUSER.locationID = LOCATION.locationID
@@ -38,12 +38,15 @@ oci_execute($stid);
             ?>
                 <div class="row">
                     <div class="col-xs-1">     
-                        <i class="far fa-user-circle"></i>
+                        <i class="far fa-user-circle fa-3x"></i>
                     </div>
                     <div class="col-lg-5">
                         <?php  
-                        echo '<h3 class="search-username">'.$row['DISPLAYNAME'].'</h3>';
-                        echo '<div class="search-location">'.$row['CITY'].', '.$row['COUNTRY'].'</div>';
+                        echo '<h3 class="search-username">'.$row['SCREENNAME'].'</h3>';
+                        if(isset($row['CITY'])=== true)
+                        {
+                            echo '<div class="search-location">'.$row['CITY'].', '.$row['COUNTRY'].'</div>';
+                        }
                         ?>
                     </div>
                 </div>
