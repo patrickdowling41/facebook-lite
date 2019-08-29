@@ -110,7 +110,7 @@ values
     :bv_passwordHash
 )';
 
-$screenName= $firstname.$surname;
+$screenName= $firstname.' '.$surname;
 $defaultVisibility = "private";
 
 $stid = oci_parse($conn, $query);
