@@ -6,6 +6,8 @@ session_start();
 require('../db_connect.php');
 include_once('nav.php');
 
+$search = $_POST['friend-search'];
+
 if (strcmp($_SESSION['loggedIn'], "yes") !== 0)
 {
     header("Location: ../login");
@@ -62,8 +64,6 @@ $stid = oci_parse($conn, $searchUser);
 oci_bind_by_name($stid, ':bv_search', $search);
 
 oci_execute($stid);
-
-$search = $_POST['friend-search'];
 
 ?>
 <body>

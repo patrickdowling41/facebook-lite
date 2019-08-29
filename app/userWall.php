@@ -52,60 +52,61 @@ while (($row = oci_fetch_array($stid, OCI_ASSOC)) != false)
         echo '<div id="'.$row['POSTID'].'">';
             echo '<div class="post-body">'.$row['POSTTIME'].'</div>';
             echo '<div class="post-body">'.$row['BODYTEXT'].'</div>';
-            echo '<input class="post-id" type="hidden" value="'.$row['POSTID'].'">';
             
         echo '</div>';
         ?>
-        
+        <form action="../functions/postLike.php" method="POST">
+            <button class="btn btn-primary" type="submit">
+                <i class="far fa-thumbs-up fa-2x"></i>
+                <?php echo '<input class="post-id" name="post-id" type="hidden" value="'.$row['POSTID'].'">';?>
+            </button>
+        </form>
+
         <div class="inline">
-            <div class="post-btn">
-                <i class="far fa-thumbs-up fa-2x" onclick=postComment();></i>
-            </div>
-            <div class="post-btn" onclick=postLike();>
-                <i class="fas fa-reply fa-2x"></i>
-            </div>
+            <form action="../functions/leaveComment.php" method="POST">
+                <input class="reply-field" name="reply-field" type="text" placeholder="Reply">
+                <button class="btn btn-primary" type="submit">
+                    <i class="fas fa-reply fa-2x"></i>
+                </button>
+            </form>
         </div>
-        <?php
-
-        echo '<input class="reply-field name="reply-field" type="text" placeholder="Reply">';
-
-        ?>
     </div>
-    <?php
-
+<?php
 }
-
 ?>
 
 <script>
 
-    function postLike()
-    {
-        // $.post(
-        //     var postID = $('input.post-id').val();
-        //     'functions/postLike.php',
-        //     {
-        //         postID: postID;
-        //     },
-        //     function(data)
-        //     {
-        //         alert("success");
-        //     }
-        // );
-    }
-    function postComment()
-    {
-        // $.post(
-        //     var postID = $('input.post-id').val();
-        //     'functions/postLike.php',
-        //     {
-        //         postID: postID;
-        //     },
-        //     function(data)
-        //     {
+    // function postLike()
+    // {
+    //     $(document).ready(function()
+    //     {
+    //         $.post(
+    //             var postID = $('input.post-id').val();
+    //             'functions/postLike.php',
+    //             {
+    //                 postID: postID;
+    //             },
+    //             function(data)
+    //             {
+    //                 alert("success");
+    //             }
+    //         );
+    //     }
+    // }
+    // function postComment()
+    // {
+    //     $.post(
+    //         var postID = $('input.post-id').val();
+    //         'functions/postLike.php',
+    //         {
+    //             postID: postID;
+    //         },
+    //         function(data)
+    //         {
                 
-        //     }
-        // );
-    }
+    //         }
+    //     );
+    // }
 
 </script>
