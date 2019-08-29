@@ -11,21 +11,59 @@ if (strcmp($_SESSION['loggedIn'], "yes") !== 0)
     header("Location: ../login");
 }
 
-$search = $_POST['friend-search'];
+function checkExistingFriendship()
+{
+    // todo return 0 if already friends, else return 1
+    return 1;
+}
 
-$searchUser='SELECT screenName, city, country
+function sendFriendRequest()
+{
+    // create the Friend Request entity
+    $timeOfRequest = date('d-m-y H:i');
+
+    $sendRequest="INSERT INTO FRIENDREQUEST
+    (
+        timeOfRequest
+    )
+    values
+    (
+        :bv_timeOfRequest
+    )";
+    $stid = oci_parse($conn, $searchUser);
+    oci_bind_by_name($stid, ':bv_timeOfRequest', $timeOfRequest);
+    oci_execute($stid);   
+
+    // Join the users to the entity
+    $sendRequest="INSERT INTO FRIEND
+    (
+        timeOfRequest
+    )
+    values
+    (
+        :bv_timeOfRequest
+    )";
+    $stid = oci_parse($conn, $searchUser);
+    oci_bind_by_name($stid, ':bv_timeOfRequest', $timeOfRequest);
+    oci_execute($stid);  
+
+}
+
+
+$searchUser="SELECT email, screenName, city, country
 FROM FACEBOOKUSER
 LEFT JOIN LOCATION
 ON FACEBOOKUSER.locationID = LOCATION.locationID
 WHERE LOWER(:bv_search) like LOWER(FACEBOOKUSER.screenName)
-OR
-LOWER(:bv_search) like LOWER(FACEBOOKUSER.email)';
+OR LOWER(:bv_search) like LOWER(FACEBOOKUSER.email)";
 
 $stid = oci_parse($conn, $searchUser);
 
 oci_bind_by_name($stid, ':bv_search', $search);
 
 oci_execute($stid);
+
+$search = $_POST['friend-search'];
 
 ?>
 <body>
@@ -37,7 +75,7 @@ oci_execute($stid);
             {
             ?>
                 <div class="row">
-                    <div class="col-xs-1">     
+                    <div class="col-xs-1">
                         <i class="far fa-user-circle fa-3x"></i>
                     </div>
                     <div class="col-lg-5">
@@ -46,6 +84,14 @@ oci_execute($stid);
                         if(isset($row['CITY'])=== true)
                         {
                             echo '<div class="search-location">'.$row['CITY'].', '.$row['COUNTRY'].'</div>';
+                        }
+                        ?>
+                    </div>
+                    <div class="col-lg-5">
+                        <?php  
+                        if (strcmp($row['EMAIL'], $_SESSION['email']) !== 0 && checkExistingFriendship() === false)
+                        {
+                            sendFriendRequest();
                         }
                         ?>
                     </div>

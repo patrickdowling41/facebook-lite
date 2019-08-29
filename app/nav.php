@@ -25,7 +25,7 @@
             <div class="row">
                 <div class="col-lg-10 inline">
                     <a href="index.php"> <i class="home-btn fab fa-facebook-square fa-3x"></i></a>
-                    <form action="addFriend.php" method="POST">
+                    <form action="searchUsers.php" method="POST">
                         <input class="friend-search-field" name="friend-search" type="text" placeholder="Search">
                         <button class="friend-search-btn" type="Submit">
                             <i class="fas fa-search"></i>
