@@ -63,7 +63,7 @@
                                 <input class="login-field" type="password" name="login-password">
                             </div> 
                             <div class="col-sm-2">
-                                <button type="submit" class="login-btn btn-primary">Login</button>
+                                <button type="submit" class="login-btn btn-primary">Log in</button>
                             </div>
                         </div>
                     </div>
