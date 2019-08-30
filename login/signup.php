@@ -166,6 +166,6 @@ if (($_SESSION['signupSuccess']))
     $_SESSION['signupSuccess'] = true;
     header('Location: index.php');
 }
-
+oci_close($conn);
 
 ?>

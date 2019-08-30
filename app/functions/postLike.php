@@ -1,5 +1,5 @@
 <?php 
-require('../db_connect.php');
+require('../../db_connect.php');
 session_start();
 
 $postID = $_POST['post-id'];
@@ -51,7 +51,9 @@ if (alreadyLiked($conn, $postID, $email) == 0)
     addLike($conn, $postID, $email);
 }
 
-header('Location: ../app/index.php');
+header('Location: ../index.php');
+
+oci_close($conn);
 
 
 ?>

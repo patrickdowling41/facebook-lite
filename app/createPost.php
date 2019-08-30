@@ -32,8 +32,8 @@ oci_bind_by_name($stid, ':bv_timeOfPost', $timeOfPost);
 
 oci_execute($stid);
 
-echo $timeOfPost;
+header("Location: index.php");
 
-// header("Location: index.php");
+oci_close($conn);
 
 ?>

@@ -34,4 +34,5 @@ oci_bind_by_name($stid, ":bv_timestamp", $timestamp);
 oci_execute($stid);
 
 header('Location: ../app/index.php');
+oci_close($conn);
 ?>

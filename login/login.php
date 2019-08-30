@@ -42,3 +42,5 @@ else
     // loads a login form to allow login from a seperate menu to indicate login was previously unsuccessful
     include_once('components/login-form.php');
 }
+
+oci_close($conn);

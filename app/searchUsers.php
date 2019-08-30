@@ -103,4 +103,6 @@ oci_execute($stid);
     </div>
 </body>
 
+<?php oci_close($conn); ?>
+
 

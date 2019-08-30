@@ -50,7 +50,7 @@ include_once('nav.php');
 
                 <!-- This is responsible for displaying all of the logged in users posts. -->
                 <?php
-                    include_once('userWall.php');
+                    include_once('components/userWall.php');
                 ?>
 
             </div>
@@ -63,3 +63,5 @@ include_once('nav.php');
 </body>
 
 <body>
+
+<?php oci_close($conn); ?>

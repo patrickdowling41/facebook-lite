@@ -33,7 +33,7 @@
     <div class="row">
         <h1>Your settings</h1>
 
-        <form action="../functions/updateStatus.php" method="POST">
+        <form action="functions/updateStatus.php" method="POST">
             <div class="col-md-6">
                 <input class="settings-input" type="text" name="status" placeholder="Status">
             </div>
@@ -42,7 +42,7 @@
             </div>
         </form>
 
-        <form action="../functions/updateDisplayName.php" method="POST">
+        <form action="functions/updateDisplayName.php" method="POST">
             <div class="col-md-6">
                 <input class="settings-input" type="text" name="display-name" placeholder="Display name">
             </div>
@@ -51,7 +51,7 @@
             </div>
         </form>
 
-        <form action="../functions/updateLocation.php" method="POST">
+        <form action="functions/updateLocation.php" method="POST">
             <div class="col-md-6">
                 <input class="settings-input" type="text" name="location-city" placeholder="City">
                 <input class="settings-input" type="text" name="location-country" placeholder="Country">
@@ -61,7 +61,7 @@
             </div>
         </form>
 
-        <form action="../functions/updateVisibility.php" method="POST">
+        <form action="functions/updateVisibility.php" method="POST">
             <div class="col-md-6">
                 <select class="settings-input"name="display-name">
                     <option value="select" selected disabled required>Select one</option>

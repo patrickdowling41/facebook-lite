@@ -31,15 +31,17 @@
 
 require('../db_connect.php');
 
-$getPostData = "SELECT posterEmail, bodyText, screenName, postID, postTime
+$getPostData = "SELECT posterEmail, bodyText, screenName, postID, TO_CHAR(postTime, 'DD MONTH YYYY HH24:MI') as postTime, TO_CHAR(postTime, 'YYMMDDHH24MI') as sortField
 from POST left join FACEBOOKUSER
 on POST.posterEmail = FACEBOOKUSER.email
 where LOWER(posterEmail) like LOWER(:bv_email)
-order by POST.postTime DESC";
+order by sortField DESC";
 
 $stid = oci_parse($conn, $getPostData);
 oci_bind_by_name($stid, ":bv_email", $_SESSION['email']);
 oci_execute($stid);
+
+//echo $row['POSTTIME'];
 
 // prints each post one by one until none remain
 while (($row = oci_fetch_array($stid, OCI_ASSOC)) != false)
@@ -58,7 +60,7 @@ while (($row = oci_fetch_array($stid, OCI_ASSOC)) != false)
             
         echo '</div>';
         ?>
-        <form action="../functions/postLike.php" method="POST">
+        <form action="functions/postLike.php" method="POST">
             <button class="btn btn-primary" type="submit">
                 <span>
                     <i class="far fa-thumbs-up fa-2x"></i>
@@ -68,7 +70,7 @@ while (($row = oci_fetch_array($stid, OCI_ASSOC)) != false)
             </button>
         </form>
         <div class="inline">
-            <form action="../functions/leaveComment.php" method="POST">
+            <form action="functions/leaveComment.php" method="POST">
                 <input class="reply-field" name="reply-field" type="text" placeholder="Reply">
                 <button class="btn btn-primary" type="submit">
                     <i class="fas fa-reply fa-2x"></i>
@@ -97,41 +99,5 @@ function calculateLikes($conn, $row)
     }
 }
 
-
+oci_close($conn);
 ?>
-
-<script>
-
-    // function postLike()
-    // {
-    //     $(document).ready(function()
-    //     {
-    //         $.post(
-    //             var postID = $('input.post-id').val();
-    //             'functions/postLike.php',
-    //             {
-    //                 postID: postID;
-    //             },
-    //             function(data)
-    //             {
-    //                 alert("success");
-    //             }
-    //         );
-    //     }
-    // }
-    // function postComment()
-    // {
-    //     $.post(
-    //         var postID = $('input.post-id').val();
-    //         'functions/postLike.php',
-    //         {
-    //             postID: postID;
-    //         },
-    //         function(data)
-    //         {
-                
-    //         }
-    //     );
-    // }
-
-</script>
