@@ -19,17 +19,19 @@ if (isset($city) && isset($country))
     oci_bind_by_name($stid, ":bv_city", $city);
     oci_bind_by_name($stid, ":bv_country", $country);
     oci_execute($stid);
-
-    $locationID=NULL;
     
     while (($row = oci_fetch_array($stid, OCI_ASSOC)) != false)
     {
         $locationID = $row['LOCATIONID'];
     }
 
-    $locationID = insertLocation($conn, $country, $city);
-    
+    if (!(isset($locationID)))
+    {
+        insertLocation($conn, $country, $city);
+        $locationID = retrieveLocation($conn, $country, $city);
+    }
     updateUser($conn, $locationID, $email);
+    
 }
 
 function insertLocation($conn, $country, $city)
@@ -49,7 +51,11 @@ function insertLocation($conn, $country, $city)
     oci_bind_by_name($stid, ":bv_city", $city);
     oci_bind_by_name($stid, ":bv_country", $country);
     oci_execute($stid);
-    
+
+}
+
+function retrieveLocation($conn, $city, $country)
+{
     $retrieveLocation = 'SELECT locationID
     FROM LOCATION
     WHERE city = :bv_city
@@ -63,12 +69,10 @@ function insertLocation($conn, $country, $city)
     {
         return $row['LOCATIONID'];
     }
-
 }
 
 function updateUser($conn, $locationID, $email)
 {
-    echo "test";
     $updateUser = "UPDATE FACEBOOKUSER
     SET locationID = :bv_locationID
     WHERE email like :bv_email";
@@ -81,6 +85,7 @@ function updateUser($conn, $locationID, $email)
     oci_execute($stid);
 }
 
-// header('Location: ../settings.php');
 oci_close($conn);
+header('Location: ../settings.php');
+
 ?>

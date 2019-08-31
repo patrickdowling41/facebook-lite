@@ -41,16 +41,19 @@
                 <button type="submit" class="btn btn-primary">Update</button>
             </div>
         </form>
+    </div>
 
-        <form action="functions/updateDisplayName.php" method="POST">
+    <div class="row">
+
+        <form action="functions/updateScreenName.php" method="POST">
             <div class="col-md-6">
-                <input class="settings-input" type="text" name="display-name" placeholder="Display name">
+                <input class="settings-input" type="text" name="screen-name" placeholder="Screen name">
             </div>
             <div class="col-md-6">
                 <button type="submit" class="btn btn-primary">Update</button>
             </div>
         </form>
-
+    <div class="row">
         <form action="functions/updateLocation.php" method="POST">
             <div class="col-md-6">
                 <input class="settings-input" type="text" name="location-city" placeholder="City">
@@ -60,18 +63,20 @@
                 <button type="submit" class="btn btn-primary">Update</button>
             </div>
         </form>
-
+    <div class="row">
         <form action="functions/updateVisibility.php" method="POST">
             <div class="col-md-6">
-                <select class="settings-input"name="display-name">
+            <label for="visibility">Visibility</label>
+                <select class="settings-input"name="visibility">
                     <option value="select" selected disabled required>Select one</option>
-                    <option value="visibility-private">Private</option>
-                    <option value="visibility-friends-only">Friends only</option>
-                    <option value="visibility-public">Public</option>
+                    <option value="private">Private</option>
+                    <option value="friends only">Friends only</option>
+                    <option value="public">Public</option>
                 </select>
             </div>
             <div class="col-md-6">
                 <button type="submit" class="btn btn-primary">Update</button>
             </div>
         </form>
-
+    </div>
+</div>

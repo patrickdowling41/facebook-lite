@@ -12,46 +12,6 @@ if (strcmp($_SESSION['loggedIn'], "yes") !== 0)
 {
     header("Location: ../login");
 }
-
-function checkExistingFriendship()
-{
-    // todo return 0 if already friends, else return 1
-    return 1;
-}
-
-function sendFriendRequest()
-{
-    // create the Friend Request entity
-    $timeOfRequest = date('d-m-y H:i');
-
-    $sendRequest="INSERT INTO FRIENDREQUEST
-    (
-        timeOfRequest
-    )
-    values
-    (
-        :bv_timeOfRequest
-    )";
-    $stid = oci_parse($conn, $searchUser);
-    oci_bind_by_name($stid, ':bv_timeOfRequest', $timeOfRequest);
-    oci_execute($stid);   
-
-    // Join the users to the entity
-    $sendRequest="INSERT INTO FRIEND
-    (
-        timeOfRequest
-    )
-    values
-    (
-        :bv_timeOfRequest
-    )";
-    $stid = oci_parse($conn, $searchUser);
-    oci_bind_by_name($stid, ':bv_timeOfRequest', $timeOfRequest);
-    oci_execute($stid);  
-
-}
-
-
 $searchUser="SELECT email, screenName, city, country
 FROM FACEBOOKUSER
 LEFT JOIN LOCATION
@@ -91,7 +51,7 @@ oci_execute($stid);
                         <?php  
                         if (strcmp($row['EMAIL'], $_SESSION['email']) !== 0 && checkExistingFriendship() === false)
                         {
-                            sendFriendRequest();
+                            sendFriendRequest($conn);
                         }
                         ?>
                     </div>
@@ -103,6 +63,46 @@ oci_execute($stid);
     </div>
 </body>
 
-<?php oci_close($conn); ?>
+<?php 
+
+function checkExistingFriendship()
+{
+    // todo return 0 if already friends, else return 1
+    return 1;
+}
+
+function sendFriendRequest($conn)
+{
+    // create the Friend Request entity
+    $timeOfRequest = date('d-m-y H:i');
+
+    $sendRequest="INSERT INTO FRIENDREQUEST
+    (
+        timeOfRequest
+    )
+    values
+    (
+        :bv_timeOfRequest
+    )";
+    $stid = oci_parse($conn, $sendRequest);
+    oci_bind_by_name($stid, ':bv_timeOfRequest', $timeOfRequest);
+    oci_execute($stid);   
+
+    // Join the users to the entity
+    $sendRequest="INSERT INTO FRIEND
+    (
+        timeOfRequest
+    )
+    values
+    (
+        :bv_timeOfRequest
+    )";
+    $stid = oci_parse($conn, $sendRequest);
+    oci_bind_by_name($stid, ':bv_timeOfRequest', $timeOfRequest);
+    oci_execute($stid);  
+
+}
+
+oci_close($conn); ?>
 
 
