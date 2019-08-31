@@ -13,7 +13,7 @@ CREATE TABLE Friend
 
 CREATE TABLE Friendship
   (
-    friendshipID NUMBER GENERATED ALWAYS as IDENTITY ,
+    friendshipID NUMBER GENERATED ALWAYS as IDENTITY,
     startDate    DATE NOT NULL ,
     friendType   VARCHAR2 (32) NOT NULL,
     CONSTRAINT FREIDNSHIP_PRIMARYKEY PRIMARY KEY ( friendshipID )
@@ -43,7 +43,7 @@ CREATE TABLE Post
     replyToID      INTEGER ,
     body           VARCHAR2 (256) NOT NULL ,
     posterEmail          VARCHAR2 (128) NOT NULL ,
-                   TIMESTAMP DATE NOT NULL ,
+    postTime DATE NOT NULL ,
     originalPostID INTEGER ,
     CONSTRAINT POST_PRIMARYKEY PRIMARY KEY (postID)
   );
@@ -58,7 +58,7 @@ CREATE TABLE FacebookUser (
     gender              VARCHAR2 (8) ,
     status              VARCHAR2 (128) ,
     visibility          VARCHAR2 (16) NOT NULL ,
-    passwordHash        VARCHAR2 (128) NOT NULL,
+    passwordHash        VARCHAR2 (256) NOT NULL,
     locationID		INTEGER,
     constraint USER_PRIMARYKEY PRIMARY KEY (email)
   ) ;
