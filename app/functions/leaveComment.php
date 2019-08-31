@@ -1,12 +1,12 @@
 <?php 
-require('../db_connect.php');
+require('../../db_connect.php');
 session_start();
 
 $body = $_POST['reply-field'];
 $originalPostID = $_POST['post-id'];
 $email = $_SESSION['email'];
 date_default_timezone_set('Australia/Melbourne');
-$timestamp = date('d-m-y H:i');
+$timestamp = date('d-m-y H:i:s');
 
 $reply = "INSERT INTO POST (
     bodyText,
@@ -19,7 +19,7 @@ VALUES
 (
     :bv_bodyText,
     :bv_email,
-    TO_DATE(:bv_timestamp, 'dd-mm-yy hh24:mi'),
+    TO_DATE(:bv_timestamp, 'dd-mm-yy hh24:mi:ss'),
     :bv_originalPostID,
     :bv_originalPostID
 )";
@@ -33,6 +33,6 @@ oci_bind_by_name($stid, ":bv_timestamp", $timestamp);
 
 oci_execute($stid);
 
-header('Location: ../app/index.php');
+header('Location: ../index.php');
 oci_close($conn);
 ?>

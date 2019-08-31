@@ -30,17 +30,16 @@
 
 require('../db_connect.php');
 
-$getPostData = "SELECT posterEmail, bodyText, screenName, postID, TO_CHAR(postTime, 'DD MONTH YYYY HH24:MI') as postTime, TO_CHAR(postTime, 'YYMMDDHH24MI') as sortField
-from POST left join FACEBOOKUSER
-on POST.posterEmail = FACEBOOKUSER.email
-where LOWER(posterEmail) like LOWER(:bv_email)
+$getPostData = "SELECT p.posterEmail, p.bodyText, fu.screenName, p.postID, TO_CHAR(p.postTime, 'DD MONTH YYYY HH24:MI') as postTime, TO_CHAR(p.postTime, 'YYYYMMDDHH24MISS') as sortField
+from POST p left join FACEBOOKUSER fu
+on p.posterEmail = fu.email
+where LOWER(p.posterEmail) like LOWER(:bv_email)
+AND p.originalPostID IS NULL
 order by sortField DESC";
 
 $stid = oci_parse($conn, $getPostData);
 oci_bind_by_name($stid, ":bv_email", $_SESSION['email']);
 oci_execute($stid);
-
-//echo $row['POSTTIME'];
 
 // prints each post one by one until none remain
 while (($row = oci_fetch_array($stid, OCI_ASSOC)) != false)
@@ -48,9 +47,7 @@ while (($row = oci_fetch_array($stid, OCI_ASSOC)) != false)
     ?>
     <div class="post-component">
         <?php
-
         $noOfLikes = calculateLikes($conn, $row);
-
         echo '<h3 class="post-screenName">'.$row['SCREENNAME'].'</h3>';
         // used as an identifier for the post as a whole.
         echo '<div id="'.$row['POSTID'].'">';
@@ -73,10 +70,19 @@ while (($row = oci_fetch_array($stid, OCI_ASSOC)) != false)
                 <input class="reply-field" name="reply-field" type="text" placeholder="Reply">
                 <button class="btn btn-primary" type="submit">
                     <i class="fas fa-reply fa-2x"></i>
-                    <?php echo '<input class="post-id" name="post-id" type="hidden" value="'.$row['POSTID'].'">';?>
+                    <?php echo '<input class="post-id" name="post-id" type="hidden" value="'.$row['POSTID'].'">'; ?>
                 </button>
             </form>
         </div>
+        <?php
+        $stidReply = getReplies($conn, $row['POSTID']); 
+
+        while (($rowReply = oci_fetch_array($stidReply, OCI_ASSOC)) != false)
+        {
+            echo '<h3>'.$rowReply['SCREENNAME'].'</h3>';
+            echo '<p>'.$rowReply['BODYTEXT'].'</p>';
+        }
+        ?>
     </div>
 <?php
 }
@@ -96,6 +102,21 @@ function calculateLikes($conn, $row)
     {
         return $row['NUMBEROFLIKES'];
     }
+}
+function getReplies($conn, $postID)
+{
+    $getReplies ="SELECT fu.screenName as screenName, p.bodyText as bodyText, TO_CHAR(postTime, 'YYYYMMDDHH24MISS') as sortField
+    FROM POST p
+    left join FACEBOOKUSER fu
+    on p.posterEmail = fu.email
+    WHERE p.originalPostID like :bv_postID
+    ORDER BY p.postTime DESC";
+
+    $stid = oci_parse($conn, $getReplies);
+    oci_bind_by_name($stid, ":bv_postID", $postID);
+    oci_execute($stid);
+
+    return $stid;
 }
 
 oci_close($conn);

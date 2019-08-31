@@ -2,23 +2,15 @@
 <html lang="en">
 <head>
 
-<?php require('../db_connect.php'); 
-session_start();
-
-// Routes to login page if user is not logged in.
-if (strcmp($_SESSION['loggedIn'], "yes") !== 0)
-{
-    header("Location: ../login");
-}
-
+<?php session_start();
+include_once('functions/confirmLoggedIn.php');
 include_once('nav.php');
-
 ?>
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Latest compiled and minified CSS -->
+<!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -56,12 +48,6 @@ include_once('nav.php');
             </div>
         </div>
     </div>
-
-    </div>
-    
-    
 </body>
 
 <body>
-
-<?php oci_close($conn); ?>
