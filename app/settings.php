@@ -24,7 +24,7 @@
 
 </head>
 
-<?php include_once('../app/nav.php'); ?>
+<?php include_once('components/nav.php'); ?>
 
 <div class="container">
     <div class="row">

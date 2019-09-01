@@ -4,7 +4,7 @@
 
 <?php session_start();
 include_once('functions/confirmLoggedIn.php');
-include_once('nav.php');
+include_once('components/nav.php');
 ?>
 
 <meta charset="utf-8">

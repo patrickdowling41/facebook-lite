@@ -40,7 +40,7 @@ if ($_SESSION["loggedIn"] === "yes")
 else
 {
     // loads a login form to allow login from a seperate menu to indicate login was previously unsuccessful
-    include_once('components/login-form.php');
+    include_once('Location: index.php');
 }
 
 oci_close($conn);

@@ -32,7 +32,7 @@
                 <div class="col-xs-2 right-align">
                     <a href="friendRequests.php"> <i class="nav-btn fas fa-user-friends fa-2x"></i></a>
                     <a href="settings.php"> <i class="nav-btn fas fa-cog fa-2x"></i></a>
-                    <a href="../login/logout.php"> <i class="nav-btn fas fa-sign-out-alt fa-2x"></i></a>
+                    <a href="../login/functions/logout.php"> <i class="nav-btn fas fa-sign-out-alt fa-2x"></i></a>
                 </div>
             </div>
         </div>

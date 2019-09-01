@@ -53,7 +53,7 @@
             <h3>It's quick and easy</h3>
 
             <!-- renders signup form from external module -->
-            <?php include_once('forms/signup-form.php');?>
+            <?php include_once('components/signup-form.php');?>
         </div>
     </div>
 </div>
