@@ -5,6 +5,7 @@ session_start();
 $postID = $_POST['post-id'];
 $email = $_SESSION['email'];
 
+// confirmation check to make sure no one can like multiple times
 function alreadyLiked($conn, $postID, $email)
 {
     $checkLiked = 'SELECT count(*) as previousLike
@@ -26,6 +27,7 @@ function alreadyLiked($conn, $postID, $email)
     return false;
 }
 
+// add like to the table
 function addLike($conn, $postID, $email)
 {
     $addLike = 'INSERT INTO RATING (
@@ -50,6 +52,7 @@ if (alreadyLiked($conn, $postID, $email) == 0)
 {
     addLike($conn, $postID, $email);
 }
+/* you can add an else case if you want to remove the like, however I chose not to for this design */
 
 header('Location: ../index.php');
 

@@ -7,8 +7,10 @@ $email = $_SESSION['email'];
 $city = $_POST['location-city'];
 $country = $_POST['location-country'];
 
+// double check server side they're set.
 if (isset($city) && isset($country))
 {
+    // will need to create a new location if it's not already in the location table, so this checks for existing location
     $checkLocationExistence = 'SELECT locationID
     FROM LOCATION
     WHERE city like :bv_city
@@ -25,11 +27,14 @@ if (isset($city) && isset($country))
         $locationID = $row['LOCATIONID'];
     }
 
+    // locationID will only be set if there is a row in the previous while loop
     if (!(isset($locationID)))
     {
+        // create new location
         insertLocation($conn, $country, $city);
         $locationID = retrieveLocation($conn, $country, $city);
     }
+    // update the user with the new location
     updateUser($conn, $locationID, $email);
     
 }

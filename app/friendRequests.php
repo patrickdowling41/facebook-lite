@@ -10,8 +10,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> 
-<!-- Facebook logo font -->
-<link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
 
 <script src="https://kit.fontawesome.com/356e745068.js"></script>
 
@@ -33,13 +31,12 @@ require('../db_connect.php');
 $email = $_SESSION['email'];
 $count = 0;
 ?>
-
 </head>
-
 <body>
     <div class="container">
         <div class="row">
             <?php
+            // returns all friend invites where the logged in user is the receiver
             $getFriendRequests = "SELECT requestID
             FROM USERREQUEST
             WHERE email like :bv_email
@@ -73,6 +70,7 @@ $count = 0;
                 while (($friendRow = oci_fetch_array($stid, OCI_ASSOC)) != false)
                 {
                     ?>
+                    <!-- form to handle the friend request. will either accept or decline depending on the submission button selected -->
                     <form action="functions/handleFriendRequest.php" method="POST">
                         <?php
                         echo '<h3 class="friend-screenName">'.$friendRow['SCREENNAME'].'</h3>';
@@ -86,6 +84,7 @@ $count = 0;
                 }
             }
 
+            // only occurs if no friend requests are found
             if ($count == 0)
             {
                 echo '<h3>No pending friend invites</h3>';

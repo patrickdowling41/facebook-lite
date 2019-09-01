@@ -17,9 +17,6 @@ include_once('nav.php');
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> 
 
-<!-- Facebook logo font -->
-<link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
-
 <script src="https://kit.fontawesome.com/356e745068.js"></script>
 
 <link rel="stylesheet" type="text/css" href="../css/app.css">
@@ -27,8 +24,6 @@ include_once('nav.php');
 </head>
 
 <body>
-
-
     <div class="container">
         <div class="row">
             <div class="col-xl-10">
@@ -42,12 +37,10 @@ include_once('nav.php');
 
                 <!-- This is responsible for displaying all of the logged in users posts. -->
                 <?php
-                    include_once('components/userWall.php');
+                // shows users wall as a component
+                include_once('components/userWall.php');
                 ?>
-
             </div>
         </div>
     </div>
 </body>
-
-<body>

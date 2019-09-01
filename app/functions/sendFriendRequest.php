@@ -6,6 +6,7 @@ session_start();
 $senderEmail = $_SESSION['email'];
 $friendEmail = $_POST['friend-email'];
 
+// checks both friend requests, and friendship to make sure no friend request is outgoing and no friendship between the two already exist
 if (checkForExistingRequest($conn, $senderEmail, $friendEmail) == true && checkForExistingFriendship($conn, $senderEmail, $friendEmail) == true)
 {
     sendFriendRequest($conn, $senderEmail, $friendEmail);
@@ -32,7 +33,8 @@ function checkForExistingRequest($conn, $senderEmail, $friendEmail)
     oci_execute($stid);   
 
     $row = oci_fetch_array($stid, OCI_ASSOC);
-
+    
+    // will return 0 if there's no existing friend request
     if ($row['COUNT'] == 0)
     {
         return true;
@@ -59,6 +61,7 @@ function checkForExistingFriendship($conn, $senderEmail, $friendEmail)
 
     $row = oci_fetch_array($stid, OCI_ASSOC);
 
+    // will return 0 if there's no existing friendship between the two users
     if ($row['COUNT'] == 0)
     {
         return true;
@@ -99,6 +102,7 @@ function sendFriendRequest($conn, $senderEmail, $friendEmail)
     
 }
 
+// inserts both sides of the user request to make up a friend request
 function createUserRequest($conn, $requestID, $userEmail, $senderOrReceiver)
 {
     $createFriendEntity = 'INSERT INTO UserRequest

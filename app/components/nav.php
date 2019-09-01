@@ -10,17 +10,14 @@
 
     <!-- Facebook logo font -->
     <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
-
+    
     <script src="https://kit.fontawesome.com/356e745068.js"></script>
 
     <link rel="stylesheet" type="text/css" href="../css/app.css">
 
 </head>
-
 <body>
-
     <nav>
-
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 inline">

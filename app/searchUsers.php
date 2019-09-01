@@ -9,17 +9,17 @@ include_once('nav.php');
 $search = $_POST['friend-search'];
 $userEmail = $_SESSION['email'];
 
-if (strcmp($_SESSION['loggedIn'], "yes") !== 0)
-{
-    header("Location: ../login");
-}
+include_once('functions/confirmLoggedIn.php');
+
+// responds all search results matching the screen name or email, not showing the logged in user however
 $searchUser="SELECT fu.email, fu.screenName, l.city, l.country
 FROM FACEBOOKUSER fu
 LEFT JOIN LOCATION l
 ON fu.locationID = l.locationID
-WHERE LOWER(:bv_search) like LOWER(fu.screenName)
-OR LOWER(:bv_search) like LOWER(fu.email)
-AND lower(:bv_userEmail) not like lower(fu.email)";
+WHERE lower(:bv_userEmail) not like lower(fu.email)
+AND LOWER(:bv_search) like LOWER(fu.screenName) 
+OR LOWER(:bv_search) like LOWER(fu.email)";
+
 
 $stid = oci_parse($conn, $searchUser);
 
@@ -37,6 +37,7 @@ oci_execute($stid);
             while (($row = oci_fetch_array($stid, OCI_ASSOC)) != false)
             {
             ?>
+                <!-- form that displays each user and allows current user to add them as friend -->
                 <form action="functions/sendFriendRequest.php" method="POST">
                     <div class="row">
                         <div class="col-xs-1">

@@ -11,9 +11,6 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> 
 
-<!-- Facebook logo font -->
-<link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
-
 <script src="https://kit.fontawesome.com/356e745068.js"></script>
 
 <!-- jQuery import -->

@@ -7,11 +7,13 @@ $senderEmail = $_POST['friend-email'];
 $friendEmail = $_SESSION['email'];
 $requestID = $_POST['friend-requestID'];
 
+// when friendship is accepted, create the friendship
 if (strcmp($_POST['task'], 'accept') == 0)
 {
     addFriend($conn, $senderEmail, $friendEmail);
 } 
 
+// request is deleted regardless of whether the friendship is accepted or declined.
 deleteRequest($conn, $requestID);
 
 function addFriend($conn, $senderEmail, $friendEmail)
@@ -50,6 +52,7 @@ function addFriend($conn, $senderEmail, $friendEmail)
     
 }
 
+// each user has a friend entity for each friendship to join the two users on friendshipID
 function createFriendEntity($conn, $friendshipID, $userEmail)
 {
     $createFriendEntity = 'INSERT INTO FRIEND
@@ -71,6 +74,7 @@ function createFriendEntity($conn, $friendshipID, $userEmail)
 
 function deleteRequest($conn, $requestID)
 {
+    // delete from friendrequest table
     $deleteFromFriendRequest = 'DELETE
     FROM FRIENDREQUEST
     WHERE requestID like :bv_requestID';
@@ -78,6 +82,7 @@ function deleteRequest($conn, $requestID)
     oci_bind_by_name($stid, ':bv_requestID', $requestID);
     oci_execute($stid);
 
+    // delete from userrequest table
     $deleteFromUserRequest = 'DELETE
     FROM USERREQUEST
     WHERE requestID like :bv_requestID';

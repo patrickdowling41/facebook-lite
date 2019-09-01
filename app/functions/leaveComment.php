@@ -33,6 +33,6 @@ oci_bind_by_name($stid, ":bv_timestamp", $timestamp);
 
 oci_execute($stid);
 
-header('Location: ../index.php');
 oci_close($conn);
+header('Location: ../index.php');
 ?>

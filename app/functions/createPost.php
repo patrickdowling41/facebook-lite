@@ -2,14 +2,12 @@
 require('../db_connect.php');
 session_start();
 
-if (strcmp($_SESSION['loggedIn'], "yes") !== 0)
-{
-    header("Location: ../login");
-}
+include_once('functions/confirmLoggedIn.php');
 
 $body = $_POST['cp-body'];
 $email = $_SESSION['email'];
 date_default_timezone_set('Australia/Melbourne');
+// creates PHP date in format dd/mm/yy hh:mm
 $timeOfPost = date('d-m-y H:i');
 
 $addLike = "INSERT INTO POST (
@@ -32,8 +30,8 @@ oci_bind_by_name($stid, ':bv_timeOfPost', $timeOfPost);
 
 oci_execute($stid);
 
-header("Location: index.php");
-
 oci_close($conn);
+
+header("Location: index.php");
 
 ?>
