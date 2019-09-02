@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 
-<form name="signup-form" action="../signup.php" method="POST">
+<form name="signup-form" action="signup.php" method="POST">
 
     <!-- Full Name --> 
     <div class="inline">
