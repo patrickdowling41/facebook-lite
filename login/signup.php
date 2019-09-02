@@ -51,7 +51,7 @@ while (($row = oci_fetch_array($stid, OCI_ASSOC)) != false)
                     <h1>Sign up to Facebook-Lite</h1>
                     <p class="error">The email provided has an existing account</p>
                     <?php
-                    include_once('forms/signup-form.php');
+                    include_once('components/signup-form.php');
                     $_SESSION['signupSuccess'] = false; ?>
                 </div>
             </div>
