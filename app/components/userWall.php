@@ -33,7 +33,7 @@ left join FacebookUser fu
 on p.posterEmail = fu.email
 full outer join Friend f
 on fu.email = f.email
-where p.email like :bv_email
+where p.posterEmail like :bv_email
 or friendshipID in 
 (
     SELECT friendshipID
