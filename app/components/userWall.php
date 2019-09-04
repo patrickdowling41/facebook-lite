@@ -42,6 +42,7 @@ or friendshipID in
     SELECT friendshipID
     FROM Friend
     WHERE email like :bv_email
+    and p.originalPostID is null
 )
 order by sortfield desc";
 
