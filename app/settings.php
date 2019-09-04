@@ -29,7 +29,6 @@
 <div class="container">
     <div class="row">
         <h1>Your settings</h1>
-
         <form action="functions/updateStatus.php" method="POST">
             <div class="col-md-6">
                 <input class="settings-input" type="text" name="status" placeholder="Status">

@@ -27,13 +27,16 @@ require('../db_connect.php');
 $email = $_SESSION['email'];
 
 // query used to get the post information and user information of the logged in users and their friends
-$getPostData = "SELECT p.posterEmail, p.bodyText, fu.screenName, p.postID, TO_CHAR(p.postTime, 'DD MONTH YYYY HH24:MI') as postTime, TO_CHAR(p.postTime, 'YYYYMMDDHH24MISS') as sortField
+$getPostData = "SELECT p.posterEmail as email, p.bodyText as bodyText, 
+fu.screenName as screenName, p.postID, TO_CHAR(p.postTime, 'DD MONTH YYYY HH24:MI')
+ as postTime, TO_CHAR(p.postTime, 'YYYYMMDDHH24MISS') as sortField
 from POST p
 left join FacebookUser fu
 on p.posterEmail = fu.email
 full outer join Friend f
 on fu.email = f.email
-where p.posterEmail like :bv_email
+where p.originalPostID is null
+and p.posterEmail like :bv_email
 or friendshipID in 
 (
     SELECT friendshipID

@@ -3,8 +3,8 @@
 require('../../db_connect.php');
 session_start();
 
-$senderEmail = $_SESSION['email'];
-$friendEmail = $_POST['friend-email'];
+$senderEmail = strtolower($_SESSION['email']);
+$friendEmail = strtolower($_POST['friend-email']);
 
 // checks both friend requests, and friendship to make sure no friend request is outgoing and no friendship between the two already exist
 if (checkForExistingRequest($conn, $senderEmail, $friendEmail) == true && checkForExistingFriendship($conn, $senderEmail, $friendEmail) == true)

@@ -36,52 +36,38 @@ $count = 0;
     <div class="container">
         <div class="row">
             <?php
-            // returns all friend invites where the logged in user is the receiver
-            $getFriendRequests = "SELECT requestID
-            FROM USERREQUEST
-            WHERE email like :bv_email
-            AND sentOrReceived like 'receiver'";
+            $getFriendDetails = "SELECT fu.email as email, fu.screenName as screenName, ur.requestID as requestID
+            FROM FACEBOOKUSER fu
+            LEFT JOIN USERREQUEST ur
+            ON ur.email = fu.email
+            WHERE ur.requestID IN
+            (
+                SELECT requestID
+                FROM USERREQUEST
+                WHERE email like :bv_email
+                AND sentOrReceived like 'receiver'
+            )
+            AND ur.EMAIL NOT LIKE :bv_email";
 
-            $stid = oci_parse($conn, $getFriendRequests);
+            $stid = oci_parse($conn, $getFriendDetails);
             oci_bind_by_name($stid, ":bv_email", $email);
             oci_execute($stid);
 
-            while (($ridRow = oci_fetch_array($stid, OCI_ASSOC)) != false)
+            while (($row = oci_fetch_array($stid, OCI_ASSOC)) != false)
             {
-                $count = $count+1;
-
-                $getFriendDetails = 'SELECT fu.email as email, fu.screenName as screenName
-                FROM FACEBOOKUSER fu
-                LEFT JOIN USERREQUEST ur
-                ON ur.email = fu.email
-                WHERE ur.email IN
-                (
-                    SELECT email
-                    FROM USERREQUEST
-                    WHERE requestID like :bv_requestID
-                )
-                AND ur.EMAIL NOT LIKE :bv_email';
-
-                $stid = oci_parse($conn, $getFriendDetails);
-                oci_bind_by_name($stid, ":bv_requestID", $ridRow['REQUESTID']);
-                oci_bind_by_name($stid, ":bv_email", $email);
-                oci_execute($stid);
-
-                while (($friendRow = oci_fetch_array($stid, OCI_ASSOC)) != false)
-                {
-                    ?>
-                    <!-- form to handle the friend request. will either accept or decline depending on the submission button selected -->
-                    <form action="functions/handleFriendRequest.php" method="POST">
-                        <?php
-                        echo '<h3 class="friend-screenName">'.$friendRow['SCREENNAME'].'</h3>';
-                        echo '<input class="friend-email" type="hidden" name="friend-email" value="'.$friendRow['EMAIL'].'">';
-                        echo '<input class="friend-requestID" type="hidden" name="friend-requestID" value="'.$ridRow['REQUESTID'].'">';
-                        ?>
-                        <button class="btn btn-danger" type="submit" name="task" value="decline">Decline</button>
-                        <button class="btn btn-success" type="submit" name="task" value="accept">Accept</button>
-                    </form> 
+                $count++;
+                ?>
+                <!-- form to handle the friend request. will either accept or decline depending on the submission button selected -->
+                <form action="functions/handleFriendRequest.php" method="POST">
                     <?php
-                }
+                    echo '<h3 class="friend-screenName">'.$row['SCREENNAME'].'</h3>';
+                    echo '<input class="friend-email" type="hidden" name="friend-email" value="'.$row['EMAIL'].'">';
+                    echo '<input class="friend-requestID" type="hidden" name="friend-requestID" value="'.$row['REQUESTID'].'">';
+                    ?>
+                    <button class="btn btn-danger" type="submit" name="task" value="decline">Decline</button>
+                    <button class="btn btn-success" type="submit" name="task" value="accept">Accept</button>
+                </form> 
+                <?php
             }
 
             // only occurs if no friend requests are found

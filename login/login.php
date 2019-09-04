@@ -27,7 +27,7 @@ while (($row = oci_fetch_array($stid, OCI_ASSOC)) != false)
     {
         /* used as an identifier that the user is now logged in when redirected back to the login home
         * user emails are stored as a cookie for 30 days */
-        $_SESSION["email"] = $email;
+        $_SESSION["email"] = strtolower($email);
         $_SESSION["loggedIn"] = "yes";
     }
 }

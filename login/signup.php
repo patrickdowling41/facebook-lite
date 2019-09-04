@@ -26,7 +26,7 @@ $_SESSION['signupSuccess'] = true;
 
 $firstname = $_POST['firstname'];
 $surname = $_POST['surname'];
-$email = $_POST['email'];
+$email = strtolower($_POST['email']);
 $passwordHash = hash("sha256", $_POST['password']);
 $birthDay = $_POST['day'];
 $birthMonth = $_POST['month'];
