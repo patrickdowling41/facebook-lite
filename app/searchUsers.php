@@ -3,6 +3,9 @@
 
 <head>
 
+<title>Facebook-lite</title>
+<link rel='shortcut icon' type='image/svg' href='../img/favicon.svg' />
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 

@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
 
+<title>Facebook-lite</title>
+<link rel='shortcut icon' type='image/svg' href='../img/favicon.svg' />
+
 <?php session_start();
 include_once('functions/confirmLoggedIn.php');
 include_once('components/nav.php');
