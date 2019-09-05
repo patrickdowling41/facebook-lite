@@ -162,8 +162,8 @@ if (($_SESSION['signupSuccess']))
 
     oci_execute($stid);
 
-    // return to login page successfully
-    $_SESSION['signupSuccess'] = true;
+    // redirect to additional details
+    $_SESSION['signupEmail'] = $email;
     header('Location: additionalDetails.php');
 }
 oci_close($conn);

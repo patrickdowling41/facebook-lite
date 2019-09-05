@@ -22,111 +22,98 @@
 <link rel="stylesheet" type="text/css" href="../css/app.css">
 </head>
 <?php
-
 require('../db_connect.php');
 $email = $_SESSION['email'];
-
-// returns the friendshipID of all the logged in users friends
-$getFriends = "SELECT friendshipID
-FROM Friend
-WHERE email like :bv_email";
-
-$stid = oci_parse($conn, $getFriends);
-oci_bind_by_name($stid, ":bv_email", $email);
+// query used to get the post information and user information of the logged in users and their friends
+$getPostData = "SELECT p.posterEmail as email, p.bodyText as bodyText, 
+fu.screenName as screenName, p.postID, TO_CHAR(p.postTime, 'DD MONTH YYYY HH24:MI')
+ as postTime, TO_CHAR(p.postTime, 'YYYYMMDDHH24MISS') as sortField
+from POST p
+left join FacebookUser fu
+on p.posterEmail = fu.email
+full outer join Friend f
+on fu.email = f.email
+where p.originalPostID is null
+and p.posterEmail like :bv_email
+or friendshipID in 
+(
+    SELECT friendshipID
+    FROM Friend
+    WHERE email like :bv_email
+    and p.originalPostID is null
+)
+order by sortfield desc";
+$stid = oci_parse($conn, $getPostData);
+oci_bind_by_name($stid, ":bv_email", $_SESSION['email']);
 oci_execute($stid);
-
-while (($friendRow = oci_fetch_array($stid, OCI_ASSOC)) != false)
+// prints each post one by one until none remain
+while (($row = oci_fetch_array($stid, OCI_ASSOC)) != false)
 {
-    // query used to get the post information and user information of the logged in users and their friends
-    $getPostData = "SELECT p.posterEmail, p.bodyText, fu.screenName, p.postID, TO_CHAR(p.postTime, 'DD MONTH YYYY HH24:MI') as postTime, TO_CHAR(p.postTime, 'YYYYMMDDHH24MISS') as sortField
-    from POST p
-    left join FacebookUser fu
-    on p.posterEmail = fu.email
-    left join Friend f
-    on fu.email = f.email
-    where friendshipID like :bv_friendshipID
-    or f.email like :bv_email
-    order by sortfield desc";
-    
-    $stid = oci_parse($conn, $getPostData);
-    oci_bind_by_name($stid, ":bv_email", $_SESSION['email']);
-    oci_bind_by_name($stid, ":bv_friendshipID", $friendRow['FRIENDSHIPID']);
-    oci_execute($stid);
-    
-    // prints each post one by one until none remain
-    while (($row = oci_fetch_array($stid, OCI_ASSOC)) != false)
-    {
+    ?>
+    <!-- Each post component as a whole is stored in this div -->
+    <div class="post-component">
+        <?php
+        $noOfLikes = calculateLikes($conn, $row);
+        echo '<h3 class="post-screenName">'.$row['SCREENNAME'].'</h3>';
+        // component of a single post identified by postID
+        echo '<div id="'.$row['POSTID'].'">';
+            echo '<div class="post-time">'.$row['POSTTIME'].'</div>';
+            echo '<div class="post-body">'.$row['BODYTEXT'].'</div>';
+            
+        echo '</div>';
         ?>
-        <!-- Each post component as a whole is stored in this div -->
-        <div class="post-component">
-            <?php
-            $noOfLikes = calculateLikes($conn, $row);
-            echo '<h3 class="post-screenName">'.$row['SCREENNAME'].'</h3>';
-            // component of a single post identified by postID
-            echo '<div id="'.$row['POSTID'].'">';
-                echo '<div class="post-time">'.$row['POSTTIME'].'</div>';
-                echo '<div class="post-body">'.$row['BODYTEXT'].'</div>';
-                
-            echo '</div>';
-            ?>
-            <!-- form used to post a like on a post -->
-            <form action="functions/postLike.php" method="POST">
-                <div class="inline">
-                    
-                    <button class="like-button btn-primary" type="submit">Like</button>
-                    <?php echo '<h3 class="no-of-likes">'.$noOfLikes.'</h3>'?>
-                        <!-- carries postid through post request, not displayed on client side -->
-                    <?php echo '<input class="post-id" name="post-id" type="hidden" value="'.$row['POSTID'].'">';?>
-                    
-                </div>
-            </form>
+        <!-- form used to post a like on a post -->
+        <form action="functions/postLike.php" method="POST">
             <div class="inline">
-                <!-- form used to leave comment -->
-                <form action="functions/leaveComment.php" method="POST">
-                    <input class="reply-field" name="reply-field" type="text" placeholder="Reply">
-                    <button class="btn-light" type="submit">
-                        <i class="fas fa-reply"></i>
-                        <!-- carries postid through post request, not displayed on client side -->
-                        <?php echo '<input class="post-id" name="post-id" type="hidden" value="'.$row['POSTID'].'">'; ?>
-                    </button>
-                </form>
+                
+                <button class="like-button btn-primary" type="submit">Like</button>
+                <?php echo '<h3 class="no-of-likes">'.$noOfLikes.'</h3>'?>
+                    <!-- carries postid through post request, not displayed on client side -->
+                <?php echo '<input class="post-id" name="post-id" type="hidden" value="'.$row['POSTID'].'">';?>
+                
             </div>
-            <?php
-            // grabs and executes query that gets all replies for the post.
-            $stidReply = getReplies($conn, $row['POSTID']); 
-            ?>
-            <div class="reply-component">
-            <?php
-                while (($rowReply = oci_fetch_array($stidReply, OCI_ASSOC)) != false)
-                {
-
-                    echo '<h3 class="reply-screenName">'.$rowReply['SCREENNAME'].'</h3>';
-                    echo '<div class="reply-body-wrapper">'."<p>".$rowReply['BODYTEXT'].'</p></div>';
-                }
-                ?>
-            </div>
+        </form>
+        <div class="inline">
+            <!-- form used to leave comment -->
+            <form action="functions/leaveComment.php" method="POST">
+                <input class="reply-field" name="reply-field" type="text" placeholder="Reply">
+                <button class="btn-light" type="submit">
+                    <i class="fas fa-reply"></i>
+                    <!-- carries postid through post request, not displayed on client side -->
+                    <?php echo '<input class="post-id" name="post-id" type="hidden" value="'.$row['POSTID'].'">'; ?>
+                </button>
+            </form>
         </div>
-    <?php
-    }
+        <?php
+        // grabs and executes query that gets all replies for the post.
+        $stidReply = getReplies($conn, $row['POSTID']); 
+        ?>
+        <div class="reply-component">
+        <?php
+            while (($rowReply = oci_fetch_array($stidReply, OCI_ASSOC)) != false)
+            {
+                echo '<h3 class="reply-screenName">'.$rowReply['SCREENNAME'].'</h3>';
+                echo '<div class="reply-body-wrapper">'."<p>".$rowReply['BODYTEXT'].'</p></div>';
+            }
+            ?>
+        </div>
+    </div>
+<?php
 }
-
 // calculates number of likes on the each post in the wall
 function calculateLikes($conn, $row)
 {
     $getLikes ='SELECT COUNT(*) as numberOfLikes
     FROM RATING
     WHERE postID like :bv_postID';
-
     $stid = oci_parse($conn, $getLikes);
     oci_bind_by_name($stid, ":bv_postID", $row['POSTID']);
     oci_execute($stid);
-
     while (($row = oci_fetch_array($stid, OCI_ASSOC)) != false)
     {
         return $row['NUMBEROFLIKES'];
     }
 }
-
 // retrieves the result of query that gets all replies from a post
 function getReplies($conn, $postID)
 {
@@ -136,13 +123,10 @@ function getReplies($conn, $postID)
     on p.posterEmail = fu.email
     WHERE p.originalPostID like :bv_postID
     ORDER BY p.postTime DESC";
-
     $stid = oci_parse($conn, $getReplies);
     oci_bind_by_name($stid, ":bv_postID", $postID);
     oci_execute($stid);
-
     return $stid;
 }
-
 oci_close($conn);
 ?>

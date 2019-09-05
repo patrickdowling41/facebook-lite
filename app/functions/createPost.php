@@ -1,5 +1,5 @@
 <?php 
-require('../db_connect.php');
+require('../../db_connect.php');
 session_start();
 
 include_once('functions/confirmLoggedIn.php');
@@ -32,6 +32,6 @@ oci_execute($stid);
 
 oci_close($conn);
 
-header("Location: index.php");
+header("Location: ../index.php");
 
 ?>

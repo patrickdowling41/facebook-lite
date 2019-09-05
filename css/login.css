@@ -127,3 +127,24 @@ h2
   {
       height:65vh;
   }
+
+  .align-left
+  {
+      text-align: left;
+  }
+
+  .align-right
+  {
+      text-align: right;
+  }
+
+  .complete-ad
+  {
+      margin-top: 3vh;
+      margin-left: 10vh;
+  }
+
+  .skip-ad
+  {
+    margin-top: 3vh;
+  }

@@ -17,12 +17,12 @@
     }
     ?>
 
-    <title>Facebook | Log in or Sign up</title>
+    <title>Facebook | Sign up</title>
     
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Latest compiled and minified CSS -->
+    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -41,22 +41,32 @@
 
 <div class="container">
     <div class="row page-content">
-        <!-- Left hand column for Recent Login -->
         <div class="span-page col-lg-6">
             <h1>Customise your profile</h1>
-            <form action="functions/completeSignup.php">
-                <label value="Display name"></label>
-                <input class="signup-ad" type="text" placeholder="Display name">
-
-                <label value="Location"></label>
-                <input class="signup-ad" type="text" placeholder="City">
-                <input class="signup-ad" type="text" placeholder="Country">
-
-                <label value="Status"></label>
-                <input class="signup-ad" type="text" placeholder="Status">
-
-                <label value="Profile Visibility"></label>
-                <input class="signup-ad" type="text" placeholder="Visibility">
+            <!-- simple form for all of the additional fields that aren't compulsory. -->
+            <form action="functions/completeSignup.php" method="POST">
+                <div class="title-tag">Screen name</div>
+                <input class="signup-ad" type="text" name="screenName" placeholder="Screen name">
+                <br>
+                <div class="title-tag">Location</div>
+                <input class="signup-ad" type="text" name="city" placeholder="City">
+                <input class="signup-ad" type="text" name="country" placeholder="Country">
+                <br>
+                <div class="title-tag">Status</div>
+                <input class="signup-ad" type="text" name="status" placeholder="Status">
+                <br>
+                <div class="title-tag">Profile Visbility</div>
+                <select class="settings-input" name="visibility">
+                    <option value="select" selected disabled>Select one</option>
+                    <option value="private">Private</option>
+                    <option value="friends only">Friends only</option>
+                    <option value="public">Public</option>
+                </select>
+                <br>
+                <div class="inline">
+                    <button class="skip-ad btn btn-danger" type="submit" name="ad" value="skip-ad">Skip</button>
+                    <button class="complete-ad btn btn-success" type="submit" name="ad" value="complete-ad">Complete sign up</button>
+                </div>                
             </form>
         </div>
     </div>
