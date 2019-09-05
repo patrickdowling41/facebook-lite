@@ -12,8 +12,9 @@ else
 {
     $email = $_SESSION['signupEmail'];
     // if either of them are unset, we don't want to alter the users location
-    if (isset($_POST['country']) && isset($_POST['city']))
+    if (isset($_POST['country']) == true && isset($_POST['city']) == true)
     {
+        echo 'test';
         $country = $_POST['country'];
         $city = $_POST['city'];
         // retrieves or creates a new location from the location table
@@ -42,6 +43,7 @@ else
 
 function getLocationID($conn, $city, $country)
 {
+    $locationID = null;
     // will need to create a new location if it's not already in the location table, so this checks for existing location
     $checkLocationExistence = 'SELECT locationID
     FROM LOCATION
@@ -60,7 +62,7 @@ function getLocationID($conn, $city, $country)
     }
 
     // locationID will only be set if there is a row in the previous while loop
-    if (!(isset($locationID)))
+    if ((isset($locationID) == false))
     {
         // create new location
         insertLocation($conn, $country, $city);
@@ -91,18 +93,13 @@ function insertLocation($conn, $country, $city)
 
 function retrieveLocation($conn, $city, $country)
 {
-    $retrieveLocation = 'SELECT locationID
-    FROM LOCATION
-    WHERE city = :bv_city
-    AND country = :bv_country';
+    $retrieveLocation = 'SELECT location_seq.currval as ID from dual';
     $stid = oci_parse($conn, $retrieveLocation);
-    oci_bind_by_name($stid, ":bv_city", $city);
-    oci_bind_by_name($stid, ":bv_country", $country);
     oci_execute($stid);
 
     while (($row = oci_fetch_array($stid, OCI_ASSOC)) != false)
     {
-        return $row['LOCATIONID'];
+        return $row['ID'];
     }
     return null;
 }
@@ -144,7 +141,7 @@ function updateVisibility($conn, $email, $visbility)
     $stid = oci_parse($conn, $updateVisibility);
 
     oci_bind_by_name($stid, ":bv_email", $email);
-    oci_bind_by_name($stid, ":bv_status", $visbility);
+    oci_bind_by_name($stid, ":bv_visibility", $visbility);
     
     oci_execute($stid);
 }
@@ -153,10 +150,9 @@ function updateScreenName($conn, $email, $screenName)
 {  
     $updateScreenName = "UPDATE FACEBOOKUSER
     SET screenName = :bv_screenName
-    where email like :bv_email
-    and :bv_status is not null";
+    where email like :bv_email";
 
-    $stid = oci_parse($conn, $email, $updateScreenName);
+    $stid = oci_parse($conn, $updateScreenName);
 
     oci_bind_by_name($stid, ":bv_email", $email);
     oci_bind_by_name($stid, ":bv_screenName", $screenName);
