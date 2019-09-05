@@ -25,8 +25,6 @@ while (($row = oci_fetch_array($stid, OCI_ASSOC)) != false)
     // compares the password hash the user inputted to the password hash in the database
     if (strcmp($row['PASSWORDHASH'], $passwordHash) === 0)
     {
-        /* used as an identifier that the user is now logged in when redirected back to the login home
-        * user emails are stored as a cookie for 30 days */
         $_SESSION["email"] = $email;
         $_SESSION["loggedIn"] = "yes";
     }

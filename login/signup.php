@@ -164,7 +164,7 @@ if (($_SESSION['signupSuccess']))
 
     // return to login page successfully
     $_SESSION['signupSuccess'] = true;
-    header('Location: index.php');
+    header('Location: additionalDetails.php');
 }
 oci_close($conn);
 
